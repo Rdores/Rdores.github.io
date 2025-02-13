@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brasil Sem Z (BSZ) - Guilda Honor of Kings</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      transition: all 0.5s ease;
+    }
+    img {
+      user-select: none;
+      pointer-events: none;
+    }
+    .card p {
+      font-size: 1.3rem;
+
+      user-select: none;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #001f3f;
+      color: #ffffff;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      overflow-x: hidden;
+      box-sizing: border-box;
+      transition: all 0.5s ease;
+    }
+    header {
+      background-color: rgba(0, 0, 0, 0);
+      width: 100%;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      top: 0;
+      z-index: 100;
+    }
+    header h1 {
+      color: #ffcc29;
+      font-size: 2rem;
+
+      user-select: none;
+    }
+    nav {
+      display: flex;
+      gap: 20px;
+    }
+    nav a {
+      color: #ffcc29;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #00ffcc;
+    }
+    #nacer { 
+      display: none;
+    }
+    .menu {
+      display: none;
+      flex-direction: column;
+      background-color: #002776;
+      position: absolute;
+      top: 80px;
+      right: 20px;
+      width: 200px;
+      border-radius: 10px;
+      box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+    }
+    .menu a {
+      padding: 15px;
+      border-bottom: 1px solid #00459e;
+    }
+    .menu a:last-child {
+      border-bottom: none;
+    }
+    .menu-btn {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+    }
+    .menu-btn div {
+      width: 30px;
+      height: 3px;
+      background-color: #ffcc29;
+      transition: all 0.3s;
+    }
+    .menu-btn.active div:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .menu-btn.active div:nth-child(2) {
+      opacity: 0;
+    }
+    .menu-btn.active div:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+    main {
+      max-width: 1200px;
+      text-align: center;
+      margin: 120px 0;
+    }
+    section {
+      margin: 80px 0;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.8s ease-out;
+    }
+    section.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .highlight {
+      color: #ffcc29;
+      font-weight: bold;
+    }
+    .btn {
+      display: inline-block;
+      padding: 15px 25px;
+      background: linear-gradient(135deg, #009739, #006d29);
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 30px;
+      box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s;
+      margin-top: 10px;
+    }
+    .btn:hover {
+      background: linear-gradient(135deg, #007f33, #005923);
+      box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.5);
+      transform: translateY(-3px);
+    }
+    footer {
+      background-color: #002776;
+      width: 100%;
+      text-align: center;
+      padding: 40px 0;
+      margin-top: 30px;
+      color: #ffffff;
+      border-top: 2px solid #ffcc29;
+
+      background: linear-gradient(135deg, #002776, #001f3f);
+
+      border-radius: 0.4rem;
+    }
+    footer img {
+      max-width: 150px;
+      margin-bottom: 15px;
+
+      border-radius: 0.4rem;
+    }
+    ul {
+      list-style: disc;
+      padding-left: 40px;
+      text-align: left;
+    }
+    .card {
+      
+        display: flex; 
+        flex-direction: column;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 30px;
+      margin: 40px 0;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+
+      background: linear-gradient(135deg, #002776, #001f3f);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .hero-section {
+      background: linear-gradient(135deg, #002776, #001f3f);
+      padding: 80px;
+      color: white;
+      text-align: center;
+      border-radius: 20px;
+      margin-top: 80px;
+    }
+    .contact-image {
+      width: 100%;
+      max-width: 300px;
+      border-radius: 20px;
+      margin: 20px auto;
+      box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+    }
+    .main-image {
+      width: 100%;
+      max-width: 400px;
+      border-radius: 20px;
+      margin: 40px auto;
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
+    }
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+      }
+      .menu-btn {
+        display: flex;
+      }
+      .card {
+        padding: 20px;
+      }
+    }
+  </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const sections = document.querySelectorAll("section");
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+          } else {
+            entry.target.classList.remove("active");
+          }
+        });
+      }, {
+        threshold: 0.1
+      });
+
+      sections.forEach(section => {
+        observer.observe(section);
+      });
+
+      const menuBtn = document.querySelector('.menu-btn');
+      const menu = document.querySelector('.menu');
+      const nacer = document.getElementById('nacer'); 
+      const btnBuild = document.getElementById('btnBuild');
+      const btnDica = document.getElementById('btnDica');
+
+      var a = false
+      menuBtn.addEventListener('click', () => {
+      //  menu.classList.toggle('active');
+       // menuBtn.classList.toggle('active'); 
+       if (a==true) { 
+        a = false;
+        nacer.style.display = 'none';
+       } else {
+        a = true;
+        nacer.style.display ='flex';
+       };
+      }); 
+
+    });
+  </script>
+</head>
+<body>
+  <header>
+    <h1>Brasil Sem Z (BSZ)</h1>
+    <nav>
+      <a href="bsz.html#sobre">Sobre</a>
+      <a href="wiki.html">Fundamentos</a>
+      <a href="bsz.html#treino">Treinamento</a>
+      <a href="bsz.html#contato">Contato</a>
+    </nav>
+    <div class="menu-btn">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <div class="menu">
+      <a href="bsz.html#sobre">Sobre</a>
+      <a href="wiki.html">Fundamentos</a>
+      <a href="bsz.html#treino">Treinamento</a>
+      <a href="bsz.html#contato">Contato</a>
+    </div>
+
+    <div id="nacer">
+      <a href="bsz.html#sobre">Sobre</a>
+      <a href="wiki.html">Fundamentos</a>
+      <a href="bsz.html#treino">Treinamento</a>
+      <a href="bsz.html#contato">Contato</a>
+    </div>
+  </header>
+  
+  <main>
+    <img class="main-image" src="guilda-imagem.jpg" alt="Imagem Central da Guilda BSZ">
+
+    <section class="hero-section">
+      <h2>Seja Bem-Vindo ao BSZ!</h2>
+      <p>A Guilda que incentiva o crescimento constante, a união e o treinamento focado.</p>
+    </section>
+
+    <section id="contato">
+      <h2>Entre em Contato</h2>
+      <div class="card">
+        <p>Quer fazer parte dessa jornada? Clique no botão abaixo e entre em contato conosco!</p>
+        <img class="contact-image" src="guilda-imagem.jpg" alt="Imagem da Guilda BSZ">
+        <a class="btn" href="https://api.whatsapp.com/send/?phone=5522981191282&text&type=phone_number&app_absent=0">Entrar na Guilda</a>
+      </div>
+    </section>
+
+    <section id="sobre">
+      <h2>Sobre a BSZ</h2>
+      <div class="card">
+        <p>A <span class="highlight">Brasil Sem Z (BSZ)</span> é uma guilda focada em <span class="highlight">treinamento, evolução e capacitação de jogadores</span> no Honor of Kings. Nosso objetivo é criar um ambiente <span class="highlight">acolhedor e sem julgamentos</span>, onde todos possam crescer juntos e se divertir.</p>
+      </div>
+    </section>
+
+    <section id="fundamentos">
+      <h2>Fundamentos da Guilda</h2>
+      <div class="card">
+        <ul>
+          <li><strong>Comunicação:</strong> Trabalhamos em equipe com estratégias claras.</li>
+          <li><strong>Respeito:</strong> Ambiente seguro e acolhedor para todos os membros.</li>
+          <li><strong>Evolução Constante:</strong> Incentivamos aprendizado contínuo e crescimento.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="treino">
+      <h2>Treinamentos e Tutoriais</h2>
+      <div class="card">
+        <p>Oferecemos sessões de treinamento semanais com estratégias avançadas e dicas para melhorar suas habilidades.</p>
+        <ul>
+          <li>Como escolher heróis e composições de time.</li>
+          <li>Dicas de posicionamento e controle de mapa.</li>
+          <li>Construção de builds e otimização de recursos.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <img src="guilda-imagem.jpg" alt="Logo BSZ">
+    <p>&copy; 2025 BSZ - Todos os direitos reservados</p>
+  </footer>
+</body>
+</html>

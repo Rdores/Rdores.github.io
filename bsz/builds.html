@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brasil Sem Z (BSZ) - Guilda Honor of Kings</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    img {
+      user-select: none;
+      pointer-events: none;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #001f3f;
+      color: #ffffff;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+    header {
+      background-color: rgba(0, 0, 0, 0);
+      width: 100%;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      top: 0;
+      z-index: 100;
+    }
+    header h1 {
+      color: #ffcc29;
+      font-size: 2rem;
+      user-select: none;
+    }
+    nav {
+      display: flex;
+      gap: 20px;
+    }
+    nav a {
+      color: #ffcc29;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+      transition: color 0.3s;
+      user-select: none;
+    }
+    nav a:hover {
+      color: #00ffcc;
+    } 
+
+    #nacer { 
+      display: none;
+    }
+    .menu {
+      display: none;
+      flex-direction: column;
+      background-color: #002776;
+      position: absolute;
+      top: 80px;
+      right: 20px;
+      width: 200px;
+      border-radius: 10px;
+      box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+    }
+    .menu a {
+      padding: 15px;
+      border-bottom: 1px solid #00459e;
+    }
+    .menu a:last-child {
+      border-bottom: none;
+    }
+    .menu-btn {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+    }
+    .menu-btn div {
+      width: 30px;
+      height: 3px;
+      background-color: #ffcc29;
+      transition: all 0.3s;
+    }
+    .menu-btn.active div:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .menu-btn.active div:nth-child(2) {
+      opacity: 0;
+    }
+    .menu-btn.active div:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+    main {
+      max-width: 1200px;
+      text-align: center;
+      margin: 120px 0;
+    }
+    section {
+      margin: 80px 0;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.8s ease-out;
+    }
+    section.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .highlight {
+      color: #ffcc29;
+      font-weight: bold;
+    }
+    .btn {
+      display: inline-block;
+      padding: 15px 25px;
+      background: linear-gradient(135deg, #009739, #006d29);
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 30px;
+      box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s;
+      margin-top: 10px;
+    }
+    .btn:hover {
+      background: linear-gradient(135deg, #007f33, #005923);
+      box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.5);
+      transform: translateY(-3px);
+    }
+    footer {
+      background-color: #002776;
+      width: 100%;
+      text-align: center;
+      padding: 40px 0;
+      margin-top: 30px;
+      color: #ffffff;
+      border-top: 2px solid #ffcc29;
+    }
+    footer img {
+      max-width: 150px;
+      margin-bottom: 15px;
+    }
+    ul {
+      list-style: disc;
+      padding-left: 40px;
+      text-align: left;
+    }
+    .card {
+      display: flex; 
+      flex-direction: column;
+      border-radius: 12px;
+
+
+      background: linear-gradient(135deg, #002776, #001f3f);
+      padding: 80px;
+      color: white;
+      text-align: center;
+      border-radius: 20px;
+      margin-top: 100px;
+
+
+      width: 40%; 
+
+      margin: 0 auto;
+      margin-top: 100px;
+      
+
+      transition: all 0.5s ease;
+
+      cursor: pointer;
+    }
+
+    .card:nth-last-child(1) {
+      background: linear-gradient(-135deg, #002776, #001f3f);
+    }
+
+    .card p {
+      font-size: 1.3rem;
+
+      user-select: none;
+    }
+
+    .card:hover {
+      background: linear-gradient(135deg, #002776, #6d5812);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      scale: 0.96;
+    }
+
+    #options-section {
+        display: flex; 
+        flex-direction: row;
+
+        gap: 0px; 
+
+        flex-wrap: wrap;
+      }
+
+    .imgTemp {
+      width: 100%;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .hero-section {
+      background: linear-gradient(135deg, #002776, #001f3f);
+      padding: 80px;
+      color: white;
+      text-align: center;
+      border-radius: 20px;
+      margin-top: 80px;
+    }
+    .contact-image {
+      width: 100%;
+      max-width: 300px;
+      border-radius: 20px;
+      margin: 20px auto;
+      box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+    }
+    .main-image {
+      width: 100%;
+      max-width: 400px;
+      border-radius: 20px;
+      margin: 40px auto;
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
+    }
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+      }
+      .menu-btn {
+        display: flex;
+      }
+      .card {
+        padding: 20px;
+      } 
+
+
+    }
+  </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const sections = document.querySelectorAll("section");
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+          } else {
+            entry.target.classList.remove("active");
+          }
+        });
+      }, {
+        threshold: 0.1
+      });
+
+      sections.forEach(section => {
+        observer.observe(section);
+      });
+
+      const menuBtn = document.querySelector('.menu-btn');
+      const menu = document.querySelector('.menu');
+      const nacer = document.getElementById('nacer'); 
+      const card = document.querySelectorAll('.card') 
+
+
+
+
+      var a = false
+      menuBtn.addEventListener('click', () => {
+      //  menu.classList.toggle('active');
+       // menuBtn.classList.toggle('active'); 
+       if (a==true) { 
+        a = false;
+        nacer.style.display = 'none';
+       } else {
+        a = true;
+        nacer.style.display = 'flex';
+       };
+      }); 
+
+      card.forEach((btn) => {
+            btn.onmousedown = function() {
+            const produtoId = btn.getAttribute('data-pub-id');// Substitua pelo valor dinâmico, se necessário
+            const novaURL = `builds/${produtoId}.html`;
+
+            window.location.href = novaURL;
+      };});
+
+    });
+
+    
+  </script>
+</head>
+<body>
+  <header>
+    <h1>Brasil Sem Z (BSZ)</h1>
+    <nav>
+      <a href="bsz.html#sobre">Sobre</a>
+      <a href="wiki.html">Fundamentos</a>
+      <a href="bsz.html#treino">Treinamento</a>
+      <a href="bsz.html#contato">Contato</a>
+    </nav>
+    <div class="menu-btn">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <div class="menu">
+      <a href="bsz.html#sobre">Sobre</a>
+      <a href="wiki.html">Fundamentos</a>
+      <a href="bsz.html#treino">Treinamento</a>
+      <a href="bsz.html#contato">Contato</a>
+    </div>
+
+    <div id="nacer">
+      <a href="bsz.html#sobre">Sobre</a>
+      <a href="wiki.html">Fundamentos</a>
+      <a href="bsz.html#treino">Treinamento</a>
+      <a href="bsz.html#contato">Contato</a>
+    </div>
+  </header>
+
+  <main>
+    <img class="main-image" src="guilda-imagem.jpg" alt="Imagem Central da Guilda BSZ">
+
+    <section class="hero-section">
+      <h2>Seja Bem-Vindo ao BSZ!</h2>
+      <p>A Guilda que incentiva o crescimento constante, a união e o treinamento focado.</p>
+    </section> 
+
+    <section id="options-section">
+      <div class="card" data-hero-ref="cirrus" data-pub-id="1">
+        <img class="imgTemp" src="Cirrus.png" alt="">
+        <p style="color: #ffcc29; margin-top: 50px;">Melhor build para Cirrus 2025</p>
+      </div>
+
+      <div class="card" data-hero-ref="angela" data-pub-id="2">
+        <img class="imgTemp" src="angela.png" alt="">
+        <p style="color: #ffcc29; margin-top: 50px;">Angela intankável</p>
+      </div>
+
+      <div class="card" data-hero-ref="cirrus" data-pub-id="3">
+        <img class="imgTemp" src="Cirrus.png" alt="">
+        <p style="color: #ffcc29; margin-top: 50px;">Build Cirros Tanque</p>
+      </div>
+
+    </section>
+
+    
+  </main>
+
+  <footer>
+    <img src="guilda-imagem.jpg" alt="Logo BSZ">
+    <p>&copy; 2025 BSZ - Todos os direitos reservados</p>
+  </footer>
+</body>
+</html>
